@@ -16,9 +16,9 @@
 #define NW_LN				"\n"
 #define NULL_TRM			'\0'
 
-#define READ_STR_FMT		"%s %u"
-#define WRITE_STR_FMT		"%s %-3u\n"
-#define DISPLAY_STR_FMT		"%u %s %u\n"
+#define READ_STR_FMT			"%s %u"
+#define WRITE_STR_FMT			"%s %-3u\n"
+#define DISPLAY_STR_FMT			"%u %s %u\n"
 
 typedef enum
 {
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 		FILE *fStream = fopen(argv[1], F_ACCESS_MODE);
 		if(fStream != NULL)
 		{
-			commandFunctions cmdFuncPtr = { displayAllRecords, appendRecord, modifyRecord };
+			commandFunctions cmdFuncPtr = {displayAllRecords, appendRecord, modifyRecord};
 
 			CommandFlags flag;
 			int mainCommand;
@@ -170,7 +170,6 @@ void getInput(char inp[], const CommandFlags *flg, int *cmd)
 	{
 		/*number of successful assignments*/
 		case 1:
-        {
 			/*only for append or modify commands*/
 			if(*flg != MAIN_COMMAND)
 			{
@@ -182,7 +181,6 @@ void getInput(char inp[], const CommandFlags *flg, int *cmd)
 					*cmd = CNT_CMD;
 			}
 			break;
-        }
 		/*EOF*/
 		case -1:
 			/*set command to exit on EOF*/
@@ -196,7 +194,7 @@ void getInput(char inp[], const CommandFlags *flg, int *cmd)
 void executeCommand(const int cmd, const commandFunctions cfp, FILE *fs, Record *rec)
 {
 	if(cmd >= -1 && cmd <= 0)
-		cfp[abs(cmd)](fs, rec, 0);					/*invoke function based on command*/
+		cfp[abs(cmd)](fs, rec, 0);			/*invoke function based on command*/
 	else if(cmd >= 1)
 		cfp[MODIFY_FCMD](fs, rec, (unsigned)cmd);	/*invoke modify function with command as index*/
 }
@@ -266,7 +264,7 @@ int validateID(const char inp[])
 				return 0;
 		}
 
-		if(i <= 8)								/*ID must have 8 digits*/
+		if(i <= 8)					/*ID must have 8 digits*/
 			return 0;
 	}
 	else
